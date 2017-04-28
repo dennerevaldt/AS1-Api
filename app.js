@@ -12,6 +12,7 @@ app.use(methodOverride('X-Method-Override'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
+app.use(cors())
 
 // skip favicon
 app.use(function (request, response, next) {
