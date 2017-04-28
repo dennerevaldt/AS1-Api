@@ -33,6 +33,8 @@ AuthController.prototype.token = function (request, response, next) {
   const username = request.body.username
   const password = request.body.password
 
+  console.log(request.body);
+
   if (!username || !password) {
     const err = new Error('Bad request')
     err.status = 400
@@ -41,6 +43,7 @@ AuthController.prototype.token = function (request, response, next) {
 
   const arrUsers = JSON.parse(fs.readFileSync('./appdata/users.json', 'utf8'));
   const user = arrUsers.find((item) => item.email === username && item.pwd === password)
+  console.log(user);
 
   if (user) {
     const expires = moment().add(1, 'days').valueOf()
@@ -50,6 +53,9 @@ AuthController.prototype.token = function (request, response, next) {
       exp: expires
     }, 'exerciseAsKey')
     response.json({
+      user_id: user.user_id,
+      name: user.name,
+      email: user.email,
       token: token
     })
   } else {
