@@ -46,13 +46,9 @@ AuthController.prototype.token = function (request, response, next) {
     const expires = moment().add(1, 'days').valueOf()
     const token = jwt.encode({
       user_id: user.user_id,
-      username: user.username,
       exp: expires
     }, 'exerciseAsKey')
     response.json({
-      user_id: user.user_id,
-      name: user.name,
-      email: user.email,
       token: token
     })
   } else {
@@ -62,6 +58,6 @@ AuthController.prototype.token = function (request, response, next) {
   }
 }
 
-module.exports = function (UserModel) {
-  return new AuthController(UserModel)
+module.exports = function () {
+  return new AuthController()
 }
