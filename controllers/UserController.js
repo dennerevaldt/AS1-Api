@@ -10,6 +10,7 @@ UserController.prototype.dataUserLogged = function (request, response, next) {
 
   response.json({
     user: {
+      user_id: user.user_id,
       name: user.name,
       email: user.email
     }
